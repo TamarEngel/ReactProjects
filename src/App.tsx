@@ -7,7 +7,8 @@ function App() {
 
   return (
     <>
-     <UserProvider/>
+    <h2>Home</h2>
+     <UserProvider />
     </>
   )
 }

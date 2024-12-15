@@ -17,7 +17,7 @@ function updateUser({ open, setOpen }: { open: boolean; setOpen: (open: boolean)
         e.preventDefault()
         console.log("changesave");
         console.log(firstNameRef.current?.value);
-        
+
         dispatch({
             type: 'UPDATE_USER', data: {
                 firstName: firstNameRef.current?.value,
@@ -31,17 +31,20 @@ function updateUser({ open, setOpen }: { open: boolean; setOpen: (open: boolean)
         setOpen(false)
     }
     return (
-        <Modal open={open} onClose={() => setOpen(false)}>
-            <Box sx={{ padding: 4, backgroundColor: 'white', width: 300, margin: 'auto', marginTop: 10 }}>
-                <h2>Update User</h2>
-                <TextField label="First Name" variant="outlined" fullWidth margin="normal" inputRef={firstNameRef}/>
-                <TextField label="Last Name" variant="outlined" fullWidth margin="normal" inputRef={lastNameRef}/>
-                <TextField label="Email" variant="outlined" fullWidth margin="normal" inputRef={emailRef}/>
-                <TextField label="Address" variant="outlined" fullWidth margin="normal" inputRef={addressRef} />
-                <TextField label="Phone" variant="outlined" fullWidth margin="normal" inputRef={phoneRef}/>
-                <Button variant="contained" onClick={handleSave} fullWidth>Save</Button>
-            </Box>
-        </Modal>
+        <div style={{marginRight:'800px'}}>
+            <Modal open={open} onClose={() => setOpen(false)}>
+                <Box sx={{ padding: 4, backgroundColor: 'white', width: 300, margin: 'auto', marginTop: 10 }}>
+                    <h2>Update User</h2>
+                    <TextField label="First Name" variant="outlined" fullWidth margin="normal" inputRef={firstNameRef} />
+                    <TextField label="Last Name" variant="outlined" fullWidth margin="normal" inputRef={lastNameRef} />
+                    <TextField label="Email" variant="outlined" fullWidth margin="normal" inputRef={emailRef} />
+                    <TextField label="Address" variant="outlined" fullWidth margin="normal" inputRef={addressRef} />
+                    <TextField label="Phone" variant="outlined" fullWidth margin="normal" inputRef={phoneRef} />
+                    <Button variant="contained" onClick={handleSave} fullWidth>Save</Button>
+                </Box>
+            </Modal>
+        </div>
+
     )
 }
 
