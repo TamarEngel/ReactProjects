@@ -5,44 +5,6 @@ import UserNameAndAvatar from './UserNameAndAvatar';
 import axios, { AxiosError } from "axios";
 
 
-// const handleSignUp = async (state: User, action: Action) => {
-//     try {
-//         const res = await axios.post('http://localhost:3000/api/user/register', action.data)
-//         state = res.data.user
-//         console.log(state);
-        
-//     }
-//     catch (e) {
-//         if (axios.isAxiosError(e))
-//             if (e.status === 400)
-//                 alert(`${e.message}`)
-//     }
-// }
-
-// const handleLogin = async (state: User, action: Action) => {
-//     try {
-//         const res = await axios.post('http://localhost:3000/api/user/login', action.data)
-//         state = res.data.user
-//     }
-//     catch (e) {
-//         if (axios.isAxiosError(e))
-//             if (e.status === 401)
-//                 alert(`${e.message}`)
-//     }
-// }
-
-// const handleUpdate = async (state: User, action: Action) => {
-//     try {
-//         const res = await axios.put('http://localhost:3000/api/user/', action.data)
-//         state = res.data.user
-//     }
-//     catch (e) {
-//         if (axios.isAxiosError(e))
-//             if (e.status === 404)
-//                 alert(`${e.message}`)
-//     }
-// }
-
 export type Action = {
     type: 'SignIn/SignUp' | 'UPDATE' | 'DELETE',
     data: Partial<User>  
@@ -50,14 +12,15 @@ export type Action = {
 function userReducer(state: User, action: Action): User {
     switch (action.type) {
         case 'SignIn/SignUp':
-            const {firstName,password}= action.data as Partial<User>
+            const {firstName,password,id}= action.data as Partial<User>
             return {
                 firstName : firstName || '',
                 lastName: '',
                 password: password || '',
                 email:'',
                 address:'',
-                phone:''
+                phone:'',
+                id:id || 0
             }
         case 'UPDATE':
             return {
@@ -67,6 +30,7 @@ function userReducer(state: User, action: Action): User {
                 email: action.data.email || state.email,
                 address: action.data.address || state.address,
                 phone: action.data.phone || state.phone,
+                id:state.id
             }
         //case 'DELETE':
         default:

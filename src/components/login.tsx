@@ -7,7 +7,6 @@ import axios from 'axios';
 const login = ({ setLog }: { setLog: (log: boolean) => void }) => {
     const [open, setOpen] = useState(false)//מנהל את מצב טופס המודאל פתוח או סגור
     const [typeB, setTypeB] = useState(false)  // סוג הכפתור שנלחץ
-    const [user, setUser] = useState({})
     const nameRef1 = useRef<HTMLInputElement>(null)
     const passwordRef1 = useRef<HTMLInputElement>(null)
     const userCon = useContext(userContext)
@@ -31,21 +30,21 @@ const login = ({ setLog }: { setLog: (log: boolean) => void }) => {
         if(typeB){
             try {
                 const res = await axios.post('http://localhost:3000/api/user/login', act.data)
-                setUser(res.data.user)
+                act.data.id=res.data.user.id
                 setLog(true) // עדכון מצב ההרשמה לכן כדי שיסגרו כפתורי הלוגין ויופיע כפתור העדכון והפרופיל
                 dispatch(act)
             }
             catch (e) {
                 if (axios.isAxiosError(e))
                     if (e.status === 401)
-                        alert(`${e.message} `)
+                        alert(`${e.message} הנתונים שהזנת שגויים`)
             }
         }
         //signUp
         else{
             try {
                 const res = await axios.post('http://localhost:3000/api/user/register', act.data)
-                setUser(res.data.user)
+                act.data.id=res.data.userId
                 setLog(true) // עדכון מצב ההרשמה לכן כדי שיסגרו כפתורי הלוגין ויופיע כפתור העדכון והפרופיל
                 dispatch(act)
             }
@@ -56,7 +55,7 @@ const login = ({ setLog }: { setLog: (log: boolean) => void }) => {
             }
         }
        
-        setOpen(false);
+        setOpen(false);//בכל מצב לסגור
         setTypeB(false)
     }
     return (

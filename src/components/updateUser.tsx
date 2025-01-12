@@ -1,31 +1,55 @@
 import { FormEvent, useContext, useRef } from 'react'
 import { Modal, Box, TextField, Button } from '@mui/material'
-import { userContext } from './UserProvider';
+import { Action, userContext } from './UserProvider';
+import axios from 'axios';
 
 function UpdateUser({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {
     const firstNameRef = useRef<HTMLInputElement>(null)
     const lastNameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
-    const passwordRef = useRef<HTMLInputElement>(null)
     const addressRef = useRef<HTMLInputElement>(null)
     const phoneRef = useRef<HTMLInputElement>(null)
     const userCon = useContext(userContext)
     if (!userCon)
         throw new Error ("ERROR Profile must be used within a UserContext.Provider")
-    const { dispatch } = userCon
-    const handleSave = (e: FormEvent) => {
+    const {user, dispatch } = userCon
+
+    const handleSave = async (e: FormEvent) => {
         e.preventDefault()
 
-        dispatch({
-            type: 'UPDATE', data: {
-                firstName: firstNameRef.current?.value,
-                lastName: lastNameRef.current?.value,
-                address: addressRef.current?.value,
-                email: emailRef.current?.value,
-                password: passwordRef.current?.value,
-                phone: phoneRef.current?.value
+        try {
+            const userId = user?.id; 
+
+            const act: Action = {
+                type: 'UPDATE',
+                data: { 
+                    firstName: firstNameRef.current?.value,
+                    lastName: lastNameRef.current?.value,
+                    address: addressRef.current?.value,
+                    email: emailRef.current?.value,
+                    phone: phoneRef.current?.value
+                }
             }
-        })
+        
+            const res = await axios.put('http://localhost:3000/api/user', act.data, {
+                headers: {
+                    'user-id': userId 
+                }
+            });
+
+            dispatch(act)
+        
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                if (e.status === 404) {
+                    alert('משתמש לא נמצא');
+                } else if (e.status === 403) {
+                    alert('גישה לא מורשית');
+                } else {
+                    alert('שגיאה לא ידועה');
+                }
+            }
+        }
         setOpen(false)
     }
     return (
