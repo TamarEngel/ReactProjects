@@ -1,10 +1,17 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  padding: 0;
   text-align: center;
-}
 
+  background-image: url('../fruits-1869132_640.jpg');
+  background-size: cover;
+  background-position: right center;
+  background-position: center; 
+  height: 100vh;
+  width: 100vw;
+  color: black;
+  overflow: hidden;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -40,3 +47,4 @@
 .read-the-docs {
   color: #888;
 }
+

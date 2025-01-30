@@ -1,9 +1,13 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router";
 import AppLayout from "./components/routerComponents/AppLayout";
-import GrandFather from "./components/routerComponents/grandFather";
-import Father from "./components/routerComponents/father";
-import GrandMother from "./components/routerComponents/grandMother";
-import Mother from "./components/routerComponents/mother";
+// import GrandFather from "./components/routerComponents/grandFather";
+// import Father from "./components/routerComponents/father";
+// import GrandMother from "./components/routerComponents/grandMother";
+// import Mother from "./components/routerComponents/mother";
+//import {createBrowserRouter } from "react-router";
+import RecipesList from "./components/recipesList";
+import RecipeDetails from "./components/recipeDetails";
+import AddRecipeForm from "./components/addRecipeForm";
 
 export const myRouter=createBrowserRouter([
     {
@@ -12,23 +16,17 @@ export const myRouter=createBrowserRouter([
         errorElement:<>main erorr</>,
         children:[
             {
-                path:'grandfather',element:<GrandFather/>,
+                path:'recipes/',element:<RecipesList/>,
                 children:[
                     {
-                        path:'father',element:<Father/>
+                        path:':id',element:<RecipeDetails/>
                     }
                 ]
 
             },
             {
-                path:'grandmother',element:<GrandMother/>,
-                children:[
-                    {
-                        path:'mother',element:<Mother/>
-                    }
-                ]
-
-            }
+                path: 'addRecipe', element: <AddRecipeForm />
+            },
         ]
     }
 ])

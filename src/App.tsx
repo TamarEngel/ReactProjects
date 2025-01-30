@@ -1,19 +1,14 @@
-
-import { RouterProvider } from 'react-router-dom'
+import { RouterProvider } from 'react-router'
 import './App.css'
-import UserProvider from './components/UserProvider'
 import { myRouter } from './Router'
 
 function App() {
-  
-
   return (
     <>
-    <h2>Home</h2>
-     <UserProvider />
+    <div className="background-image"></div>
+    <h2>Tasty Recipes for Every Occasion</h2>
      <RouterProvider router={myRouter}/>
     </>
   )
 }
-
 export default App
