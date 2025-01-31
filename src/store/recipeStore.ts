@@ -36,6 +36,7 @@ class RecipeStore {
                     'user-id': newRecipe.authorId
                 }
             });
+            //this.list.push(res.data.recipes)
             this.fetchRecipes()
         } catch (e) {
             if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)

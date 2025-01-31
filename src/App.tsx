@@ -6,7 +6,7 @@ function App() {
   return (
     <>
     <div className="background-image"></div>
-    <h2>Tasty Recipes for Every Occasion</h2>
+    <h2 >Tasty Recipes for Every Occasion</h2>
      <RouterProvider router={myRouter}/>
     </>
   )

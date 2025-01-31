@@ -69,8 +69,8 @@ const login = ({ setLog }: { setLog: (log: boolean) => void }) => {
                         {typeB?<h2>Login</h2>:<h2>Sign Up</h2>}
                         <TextField label="Name" variant="outlined" fullWidth margin="normal" inputRef={nameRef1} sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#B0B0B0' }, '&:hover fieldset': { borderColor: 'pink' }, '&.Mui-focused fieldset': { borderColor: 'pink' } }, '& .MuiInputLabel-root': { color: '#B0B0B0' }, '& .MuiInputLabel-root.Mui-focused': { color: 'black' } }} />
                         <TextField label="Password" type="password" variant="outlined" fullWidth margin="normal" inputRef={passwordRef1} sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#B0B0B0' }, '&:hover fieldset': { borderColor: 'pink' }, '&.Mui-focused fieldset': { borderColor: 'pink' } }, '& .MuiInputLabel-root': { color: '#B0B0B0' }, '& .MuiInputLabel-root.Mui-focused': { color: 'black' } }} />
-                        <Button variant="outlined" onClick={handleLogin} fullWidth sx={{ marginTop: 2.5, borderColor: 'pink', color: 'black', backgroundColor: 'transparent', '&:hover': { backgroundColor: 'transparent', borderColor: 'black', color: 'pink' }, '&:active': { backgroundColor: 'transparent', color: 'pink' } }}>
-                            Save
+                        <Button variant="outlined" onClick={handleLogin} fullWidth sx={{ textTransform: 'none',marginTop: 2.5, borderColor: 'pink', color: 'black', backgroundColor: 'transparent', '&:hover': { backgroundColor: 'transparent', borderColor: 'black', color: 'pink' }, '&:active': { backgroundColor: 'transparent', color: 'pink' } }}>
+                            You're In!
                         </Button>
                     </Box>
                 </Modal>
