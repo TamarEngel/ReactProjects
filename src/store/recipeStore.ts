@@ -20,15 +20,10 @@ class RecipeStore {
         try {
             const res = await axios.get(`http://localhost:3000/api/recipes`, {});
             this.list = res.data;
-            console.log(res.data);
-
         } catch (e) {
             console.error("Error fetching recipes:", e);
         }
     });
-    get getRecipes() {
-        return this.list
-    }
     addRecipe = action(async (newRecipe: RecipeType) => {
         try {
             const res = await axios.post(`http://localhost:3000/api/recipes`, newRecipe, {
@@ -36,7 +31,7 @@ class RecipeStore {
                     'user-id': newRecipe.authorId
                 }
             });
-            this.list.push(res.data.recipes)
+            this.fetchRecipes();
         } catch (e) {
             if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
                 alert('מייל או סיסמא לא תקינים')
@@ -65,6 +60,10 @@ class RecipeStore {
             console.log(e);
         }
     });
+
+    get getRecipes() {
+        return this.list
+    }
 
     GetRecipeById(id: number): RecipeType | undefined {
         return this.list.find(t => t.id === id);

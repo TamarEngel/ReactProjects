@@ -34,7 +34,7 @@ export function userReducer(state: User, action: Action): User {
             return state;
     }
 }
-export const userContext = createContext<{ user: User | null; dispatch: React.Dispatch<any> } | null>(null);
+export const UserContext = createContext<{ user: User | null; dispatch: React.Dispatch<any> } | null>(null);
 function HomePage() {
     const [log, setLog] = useState(false)
     return (<>

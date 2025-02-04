@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { IconButton, Drawer, List, ListItem, ListItemText, Box } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { Link } from "react-router";
-import { userContext } from "../HomePage";
+import { UserContext } from "../HomePage";
 import {Home,AddCircle,Fastfood } from '@mui/icons-material';
 
 const NavBar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const context = useContext(userContext);
+  const context = useContext(UserContext);
   const menuItems = [
     { text: "Home", path: "/",icon: Home },
     { text: "recipes", path: "/recipes",icon: Fastfood },

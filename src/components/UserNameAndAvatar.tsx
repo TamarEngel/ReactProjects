@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react'
-import { userContext } from './HomePage'
+import { UserContext } from './HomePage'
 import { Avatar, Button, Typography } from '@mui/material';
 import UpdateUser from './updateUser';
 
 function UserNameAndAvatar() {
   const [open, setOpen] = useState(false)
-  const userCon = useContext(userContext)
+  const userCon = useContext(UserContext)
   if (!userCon)
     throw new Error("ERROR Profile must be used within a UserContext.Provider")
   const { user } = userCon

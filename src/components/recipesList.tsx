@@ -10,7 +10,6 @@ export default observer(() => {
   const handleUpdate = (recipe: RecipeType) => {
     setcurrentRecpie(recipe);
     navigate(`${recipe.id}`)
-    console.log("select one recipe");
   }
 
   const hasContent = location.pathname !== '/recipes'; 

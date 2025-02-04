@@ -4,7 +4,7 @@ import { User } from '../../User';
 import { useReducer } from 'react';
 import HomePage, { userReducer } from '../HomePage'
 import { Outlet } from "react-router"
-import { userContext } from '../HomePage';
+import { UserContext } from '../HomePage';
 
 function AppLayout() {
   const initialUser: User = {
@@ -18,13 +18,13 @@ function AppLayout() {
   const [user, dispatch] = useReducer(userReducer, initialUser);
   return (
     <div>
-      <userContext.Provider value={{ user, dispatch }}>
+      <UserContext value={{ user, dispatch }}>
         <HomePage/>
         <NavBar />
         <Outlet />
         <Container sx={{ marginTop: 10 }}>
         </Container>
-      </userContext.Provider>
+      </UserContext>
     </div>
   );
 }

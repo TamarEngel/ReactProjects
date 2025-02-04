@@ -4,13 +4,13 @@ import { Outlet, useNavigate } from "react-router";
 import {Grid,Box,List,ListItem,ListItemButton,Typography,} from "@mui/material";
 import { toJS } from "mobx";
 import recipeStore, { RecipeType } from "../store/recipeStore";
-import { userContext } from "./HomePage";
+import { UserContext } from "./HomePage";
 
 export default observer(() => {
   const [currentRecpie, setcurrentRecpie] = useState<RecipeType | null>(null);
 
   const navigate = useNavigate();
-  const userCon = useContext(userContext)
+  const userCon = useContext(UserContext)
     if (!userCon)
         throw new Error("ERROR Profile must be used within a UserContext.Provider")
   const recipes = toJS(recipeStore.getRecipes);
@@ -21,7 +21,6 @@ export default observer(() => {
   const handleUpdate = (recipe: RecipeType) => {
     setcurrentRecpie(recipe);
     navigate(`${recipe.id}`);
-    console.log("Selected recipe:", recipe);
   };
 
   return (

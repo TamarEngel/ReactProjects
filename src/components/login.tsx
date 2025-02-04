@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useRef, useState } from 'react'
 import { Button, Modal, TextField, Box } from '@mui/material';
-import { userContext } from './HomePage';
+import { UserContext } from './HomePage';
 import { Action } from './HomePage'
 import axios from 'axios';
 
@@ -9,7 +9,7 @@ const login = ({ setLog }: { setLog: (log: boolean) => void }) => {
     const [typeB, setTypeB] = useState(false)
     const nameRef1 = useRef<HTMLInputElement>(null)
     const passwordRef1 = useRef<HTMLInputElement>(null)
-    const userCon = useContext(userContext)
+    const userCon = useContext(UserContext)
     if (!userCon)
         throw new Error("ERROR Profile must be used within a UserContext.Provider")
     const { dispatch } = userCon 

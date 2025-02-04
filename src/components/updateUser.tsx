@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useRef } from 'react'
 import { Modal, Box, TextField, Button } from '@mui/material'
-import { Action, userContext } from './HomePage';
+import { Action, UserContext } from './HomePage';
 import axios from 'axios';
 
 function UpdateUser({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {
@@ -9,7 +9,7 @@ function UpdateUser({ open, setOpen }: { open: boolean; setOpen: (open: boolean)
     const emailRef = useRef<HTMLInputElement>(null)
     const addressRef = useRef<HTMLInputElement>(null)
     const phoneRef = useRef<HTMLInputElement>(null)
-    const userCon = useContext(userContext)
+    const userCon = useContext(UserContext)
     if (!userCon)
         throw new Error("ERROR Profile must be used within a UserContext.Provider")
     const { user, dispatch } = userCon

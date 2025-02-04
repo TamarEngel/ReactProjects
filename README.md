@@ -1,13 +1,11 @@
 בשרת עשיתי כמה שינויים:
 
 1: recipes.js:
-
-הוספתי פונקצית עדכון זו:
+פתי פונקצית עדכון זו:
 router.put('/', recipeMiddleware, (req, res) => {
     const { title, description, ingredients, instructions } = req.body;
     const recipeId = req.header('recipe-id'); 
     const db = JSON.parse(fs.readFileSync(dbPath));
-
     const recipe = db.recipes.find(recipe => recipe.id === Number(recipeId));
 
     if (!recipe) {
