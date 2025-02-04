@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { IconButton, Drawer, List, ListItem, ListItemText, Box } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { Link } from "react-router";
-import { userContext } from "../UserProvider";
-import {Home,Settings,AddCircle,Fastfood } from '@mui/icons-material';
+import { userContext } from "../HomePage";
+import {Home,AddCircle,Fastfood } from '@mui/icons-material';
 
 const NavBar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -15,6 +15,8 @@ const NavBar = () => {
   
   if (context?.user?.id) {
     menuItems.push({ text: "addRecipe", path: "/addRecipe",icon:AddCircle });
+    menuItems.push({ text: "My Recipes", path: "/MyRecipe",icon:AddCircle });
+
   }
   const toggleDrawer = (open: boolean) => () => {
     setIsDrawerOpen(open);
@@ -32,7 +34,7 @@ const NavBar = () => {
           <List sx={{ width: "100%" }}>
             {menuItems.map((item, index) => (
               <ListItem key={index} component={Link} to={item.path} sx={{ textAlign: "center", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.1)", transform: "scale(1.05)" } }}>
-                <IconButton sx={{ color: "black", marginRight: 2 }}><item.icon /></IconButton> {/* אייקון של כל פריט */}
+                <IconButton sx={{ color: "black", marginRight: 2 }}><item.icon /></IconButton> 
                 <ListItemText primary={item.text} sx={{ color: "black", "&:hover": { color: "pink" } }} />
               </ListItem>
             ))}

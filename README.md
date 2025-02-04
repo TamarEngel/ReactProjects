@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+בשרת עשיתי כמה שינויים:
+1: recipes.js:
+הובפתי פונקצית עדכון זו:
+router.put('/', recipeMiddleware, (req, res) => {
+    const { title, description, ingredients, instructions } = req.body;
+    const recipeId = req.header('recipe-id'); 
+    const db = JSON.parse(fs.readFileSync(dbPath));
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+    const recipe = db.recipes.find(recipe => recipe.id === Number(recipeId));
 
-Currently, two official plugins are available:
+    if (!recipe) {
+        return res.status(404).json({ message: "Recipe not found" });
+    }
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    if (recipe.authorId !== req.header('user-id')) {
+        return res.status(403).json({ message: "Unauthorized" });
+    }
 
-## Expanding the ESLint configuration
+    recipe.title = title;
+    recipe.description = description;
+    recipe.ingredients = ingredients;
+    recipe.instructions = instructions;
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
 
-- Configure the top-level `parserOptions` property like this:
+    res.json({ recipe });
+});
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+export default router;
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2:הוספתי קובץ recipeMiddleware
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+export default (req, res, next) => {
+    const recipeId = req.header('recipe-id');
+    const userId = req.header('user-id'); 
+    const db = JSON.parse(fs.readFileSync(path.join(__dirname, '../db/db.json')));
+
+    const recipe = db.recipes.find(recipe => recipe.id == recipeId);
+    
+    if (!recipe) {
+        return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    if (recipe.authorId !== userId) {
+        return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    req.recipe = recipe; 
+    next();
+};
+
+תודה רבה!!!

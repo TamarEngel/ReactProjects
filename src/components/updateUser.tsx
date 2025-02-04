@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useRef } from 'react'
 import { Modal, Box, TextField, Button } from '@mui/material'
-import { Action, userContext } from './UserProvider';
+import { Action, userContext } from './HomePage';
 import axios from 'axios';
 
 function UpdateUser({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {

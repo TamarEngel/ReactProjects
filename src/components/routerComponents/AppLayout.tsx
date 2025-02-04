@@ -2,9 +2,9 @@ import { Container } from '@mui/material'
 import NavBar from './navBar';
 import { User } from '../../User';
 import { useReducer } from 'react';
-import UserProvider, { userReducer } from '../UserProvider'
+import HomePage, { userReducer } from '../HomePage'
 import { Outlet } from "react-router"
-import { userContext } from '../UserProvider';
+import { userContext } from '../HomePage';
 
 function AppLayout() {
   const initialUser: User = {
@@ -19,7 +19,7 @@ function AppLayout() {
   return (
     <div>
       <userContext.Provider value={{ user, dispatch }}>
-        <UserProvider/>
+        <HomePage/>
         <NavBar />
         <Outlet />
         <Container sx={{ marginTop: 10 }}>
@@ -30,14 +30,3 @@ function AppLayout() {
 }
 
 export default AppLayout;
-
-
-
-
-
-
-
-
-
-
-

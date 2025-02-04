@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useRef, useState } from 'react'
 import { Button, Modal, TextField, Box } from '@mui/material';
-import { userContext } from './UserProvider';
-import { Action } from './UserProvider'
+import { userContext } from './HomePage';
+import { Action } from './HomePage'
 import axios from 'axios';
 
 const login = ({ setLog }: { setLog: (log: boolean) => void }) => {

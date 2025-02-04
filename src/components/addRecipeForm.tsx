@@ -3,7 +3,7 @@ import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import recipeStore, { RecipeType } from "../store/recipeStore";
 import { useContext, useState } from "react";
-import { userContext } from "./UserProvider";
+import { userContext } from "./HomePage";
 import { TextField, Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
@@ -21,12 +21,7 @@ const AddRecipeForm = observer(() => {
     const [click, setClick] = useState(true);
     const userCon = useContext(userContext);
     if (!userCon) throw new Error("ERROR Profile must be used within a UserContext.Provider");
-    const {
-        register,
-        handleSubmit,
-        reset,
-        control,
-        formState: { errors },
+    const {register,handleSubmit,reset,control,formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { userContext } from './UserProvider'
+import { userContext } from './HomePage'
 import { Avatar, Button, Typography } from '@mui/material';
 import UpdateUser from './updateUser';
 

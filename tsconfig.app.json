@@ -24,3 +24,5 @@
   },
   "include": ["src"]
 }
+
+// "include": ["src", "src/components/HomePage.tsx"]

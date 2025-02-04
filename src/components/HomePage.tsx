@@ -35,7 +35,7 @@ export function userReducer(state: User, action: Action): User {
     }
 }
 export const userContext = createContext<{ user: User | null; dispatch: React.Dispatch<any> } | null>(null);
-function UserProvider() {
+function HomePage() {
     const [log, setLog] = useState(false)
     return (<>
         {!log && <Login setLog={setLog} />}
@@ -43,4 +43,4 @@ function UserProvider() {
     </>)
 }
 
-export default UserProvider
+export default HomePage
