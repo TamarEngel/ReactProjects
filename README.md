@@ -1,6 +1,8 @@
 בשרת עשיתי כמה שינויים:
+
 1: recipes.js:
-הובפתי פונקצית עדכון זו:
+
+הוספתי פונקצית עדכון זו:
 router.put('/', recipeMiddleware, (req, res) => {
     const { title, description, ingredients, instructions } = req.body;
     const recipeId = req.header('recipe-id'); 
